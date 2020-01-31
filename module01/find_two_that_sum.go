@@ -1,5 +1,7 @@
 package module01
 
+import "fmt"
+
 // FindTwoThatSum will look for two numbers in the provided
 // numbers slice that sum up to the sum argument. It will then
 // return the indices of each of these numbers.
@@ -35,5 +37,28 @@ package module01
 //    for the sum of 4.
 //
 func FindTwoThatSum(numbers []int, sum int) (int, int) {
-	return 0, 0
+	firstIndex := -1
+	secondIndex := -1
+	diff := 0
+	ok := false
+	for i, val1 := range numbers {
+		diff = sum - val1
+		fmt.Println("diff", diff)
+		firstIndex = i
+		for j, val2 := range numbers {
+			if val2 == diff && j != i {
+				secondIndex = j
+				ok = true
+				break
+			}
+		}
+		if ok == true {
+			break
+		}
+	}
+	return firstIndex, secondIndex
+}
+
+func main() {
+	FindTwoThatSum([]int{1, 2, 3, 4}, 7)
 }
